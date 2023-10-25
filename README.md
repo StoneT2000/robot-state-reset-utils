@@ -14,10 +14,11 @@ Planned:
 
 ## Getting Started
 
-Only two dependencies are needed: Gymnasium (or Gym if you use MetaWorld) and the dependency for the benchmark you are using (e.g. mani-skill2 for the ManiSkill2 benchmark).
+Only a few dependencies install them as so
 
 ```bash
-pip install gymnasium h5py desired_benchmark
+pip install gymnasium h5py
+pip install mani-skill2
 ```
 
 
