@@ -12,6 +12,14 @@ Supported Benchmarks:
 Planned:
 - Isaac Sim Environments
 
+## Getting Started
+
+Only two dependencies are needed: Gymnasium (or Gym if you use MetaWorld) and the dependency for the benchmark you are using (e.g. mani-skill2 for the ManiSkill2 benchmark).
+
+```bash
+pip install gymnasium h5py desired_benchmark
+```
+
 
 ## Demonstration Formatting/Conversion
 
