@@ -4,6 +4,8 @@ from metaworld.envs import (
     ALL_V2_ENVIRONMENTS_GOAL_OBSERVABLE,
 )
 from shimmy.openai_gym_compatibility import _convert_space
+from typing import TypeVar
+MWState = TypeVar("MWState") # usually a flat vector
 
 class MetaWorldStateResetWrapper(gym.Env):
     """
@@ -36,13 +38,13 @@ class MetaWorldStateResetWrapper(gym.Env):
         info["success"] = bool(info["success"])
         return obs, float(info["success"]), False, False, info
 
-    def get_env_state(self):
+    def get_env_state(self) -> MWState:
         _last_rand_vec = self.gym_env._last_rand_vec
         joint_state, mocap_state = self.gym_env.get_env_state()
         mocap_pos, mocap_quat = mocap_state
         return dict(_last_rand_vec=_last_rand_vec, joint_state=joint_state.flatten(), mocap_pos=mocap_pos, mocap_quat=mocap_quat)
 
-    def set_env_state(self, state):
+    def set_env_state(self, state: MWState):
         self.gym_env._freeze_rand_vec = True
         joint_state, _ = self.gym_env.get_env_state()
         joint_state = joint_state.from_flattened(state["joint_state"], self.gym_env.sim)
